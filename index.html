@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isabel Weinerth — UX Researcher</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2563EB;
+      --blue-light: #EFF6FF;
+      --blue-mid: #DBEAFE;
+      --blue-dark: #1D4ED8;
+      --white: #FFFFFF;
+      --off-white: #F9FAFB;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-400: #94A3B8;
+      --gray-600: #475569;
+      --gray-800: #1E293B;
+      --gray-900: #0F172A;
+      --font: 'Georgia', 'Times New Roman', serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--gray-800);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 48px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--gray-900);
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links .nav-cta {
+      background: var(--blue);
+      color: white !important;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.15s !important;
+    }
+    .nav-links .nav-cta:hover { background: var(--blue-dark) !important; }
+
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 48px 72px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .hero h1 { margin-bottom: 32px; }
+    .hero-top {
+      position: relative;
+      padding-right: calc(320px + 56px);
+      margin-bottom: 36px;
+    }
+    .hero-photo-col {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 320px;
+      height: 520px;
+    }
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      display: block;
+      border-radius: 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      transform: scale(1);
+    }
+    @media (max-width: 720px) {
+      .hero-top { padding-right: 0; }
+      .hero-photo-col { display: none; }
+    }
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: var(--font);
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 400;
+      color: var(--gray-900);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+    .hero-bio {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.75;
+    }
+    .hero-bio p { margin-bottom: 16px; }
+    .hero-bio p:last-child { margin-bottom: 0; }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+    }
+    .hero-methods {
+      margin-top: 36px;
+    }
+    .hero-methods-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 12px;
+    }
+    .hero-methods-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hero-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: 100px;
+      flex: 1;
+    }
+    .hero-pill svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      padding: 72px 48px;
+    }
+    .section.alt { background: var(--off-white); }
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: var(--font);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--gray-900);
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── METHODS ── */
+    .methods-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .method-tag {
+      background: var(--blue-mid);
+      color: var(--blue-dark);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 100px;
+    }
+
+    /* ── CASE STUDY CARDS ── */
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 680px) {
+      .case-studies-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 20px; }
+      .hero, .section { padding-left: 20px; padding-right: 20px; }
+    }
+
+    .cs-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 28px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .cs-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 4px 24px rgba(37,99,235,0.12);
+      transform: translateY(-2px);
+    }
+    .cs-card-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .cs-card-title {
+      font-family: var(--font);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--gray-900);
+      line-height: 1.3;
+    }
+    .cs-card-audience {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .cs-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .cs-tag {
+      background: var(--gray-100);
+      color: var(--gray-600);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .cs-research-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+    .cs-research-type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue-dark);
+      background: var(--blue-mid);
+      padding: 3px 9px;
+      border-radius: 100px;
+    }
+    .cs-card-cta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 4px;
+    }
+    .cs-card-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.15s;
+    }
+    .cs-card:hover .cs-card-cta svg { transform: translateX(3px); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 760px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+      animation: modalIn 0.22s ease;
+      margin: auto;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      background: var(--blue);
+      padding: 32px 36px 28px;
+      color: white;
+      position: relative;
+    }
+    .modal-header-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 10px;
+    }
+    .modal-header h2 {
+      font-family: var(--font);
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .modal-header-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .modal-tag {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      line-height: 1;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.35); }
+
+    .modal-body {
+      padding: 36px;
+    }
+
+    /* Impact block */
+    .impact-block {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .impact-block-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .impact-block p {
+      font-size: 15px;
+      color: var(--gray-800);
+      line-height: 1.7;
+    }
+
+    /* Modal sections */
+    .modal-section {
+      margin-bottom: 28px;
+    }
+    .modal-section h3 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+    .modal-section p {
+      font-size: 15px;
+      color: var(--gray-700, #334155);
+      line-height: 1.75;
+    }
+    .modal-section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .modal-section ul li {
+      font-size: 15px;
+      color: var(--gray-700, #334155);
+      line-height: 1.65;
+      padding-left: 20px;
+      position: relative;
+    }
+    .modal-section ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 13px;
+    }
+
+    /* Callout box inside modal */
+    .modal-callout {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 12px;
+    }
+    .modal-callout-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+    }
+    .modal-callout p {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+
+    /* Process at a glance */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .process-item {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .process-item-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 4px;
+    }
+    .process-item-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    .modal-divider {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin: 28px 0;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 36px; }
+    .exp-item {}
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .exp-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+    .exp-date {
+      font-size: 13px;
+      color: var(--gray-400);
+      white-space: nowrap;
+    }
+    .exp-company {
+      font-size: 14px;
+      color: var(--blue);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      padding-left: 20px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gray-400);
+    }
+    .exp-note {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list { display: flex; flex-direction: column; gap: 24px; }
+    .edu-item {
+      padding: 20px 24px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 12px;
+    }
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+    .edu-date {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    .edu-degree {
+      font-size: 14px;
+      color: var(--blue);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .edu-note {
+      font-size: 13px;
+      color: var(--gray-500, #64748b);
+      font-style: italic;
+    }
+
+    /* ── ABOUT / INTERESTS ── */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .about-layout { grid-template-columns: 1fr; } }
+    .about-bio p {
+      font-size: 16px;
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .interests-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .interest-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .interest-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--blue-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .interest-text {}
+    .interest-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+    .interest-desc {
+      font-size: 13px;
+      color: var(--gray-500, #64748b);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900);
+      padding: 52px 48px;
+      color: white;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-name {
+      font-family: var(--font);
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .footer-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: white; }
+
+    /* ── SCROLL HINT ── */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      margin: 0 auto 48px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Isabel Weinerth</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Case Studies</a>
+    <a href="#experience">Experience</a>
+    <a href="#outside-work">Outside of Work</a>
+    <a href="mailto:isabelweinerth@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <p class="hero-eyebrow">UX Researcher</p>
+  <h1>Turning complex questions<br/>into <em>clear decisions.</em></h1>
+  <div class="hero-top">
+    <div class="hero-bio">
+      <p>I'm a qualitative UX researcher who works at scale, leading 30+ end-to-end studies and 400+ sessions annually. I specialize in IDIs and focus groups backed by quantitative triangulation, to help product and design teams make confident decisions faster.</p>
+      <p>At Fuel Cycle, I manage $2M+ in annual research budgets and partner on end-to-end research with some of the top names in tech and social media. I'm known for tripling monthly project volume and driving 250% YoY revenue growth with our top client, becoming their exclusively requested lead for mission-critical research.</p>
+      <p>My bread and butter is conducting impactful research with Content Creators. I'm widely recognized for my moderation skills and subject matter expertise, enabling open spaces where creators speak candidly while guiding the conversation strategically to translate their dialogue into product decisions. That work has shaped features, design direction, and business strategy across the creator ecosystem.</p>
+    </div>
+    <div class="hero-photo-col">
+      <img class="hero-photo" src="headshot.jpg" alt="Isabel Weinerth" />
+    </div>
+  </div>
+  <div class="hero-meta">
+    <span class="hero-pill">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      400+ IDIs &amp; FGs / Year
+    </span>
+    <span class="hero-pill">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      30+ Studies Annually
+    </span>
+    <span class="hero-pill">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Qual-First, Mixed-Methods
+    </span>
+  </div>
+  <div class="hero-methods">
+    <p class="hero-methods-label">Methodologies</p>
+    <div class="hero-methods-tags">
+      <span class="method-tag">In-Depth Interviews</span>
+      <span class="method-tag">Focus Groups</span>
+      <span class="method-tag">Diary Studies</span>
+      <span class="method-tag">Concept &amp; Prototype Testing</span>
+      <span class="method-tag">Usability Testing (Moderated)</span>
+      <span class="method-tag">Usability Testing (Unmoderated)</span>
+      <span class="method-tag">Co-Creation &amp; Design Sprints</span>
+      <span class="method-tag">Jobs-to-Be-Done Analysis</span>
+      <span class="method-tag">Mixed Methods (Quant-Qual)</span>
+      <span class="method-tag">Qualitative Surveys</span>
+      <span class="method-tag">Longitudinal &amp; Multi-Wave Research</span>
+      <span class="method-tag">Thematic Analysis</span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- CASE STUDIES -->
+<section class="section alt" id="work">
+  <div class="section-inner">
+    <p class="section-label">Case Studies</p>
+    <h2 class="section-title">Key Work</h2>
+    <div class="case-studies-grid">
+
+      <div class="cs-card" onclick="openModal('cs2')">
+        <div class="cs-card-number">Case Study 01</div>
+        <div class="cs-card-title">Creator Acquisition &amp; Retention: From Pilot to National Launch</div>
+        <div class="cs-research-types">
+          <span class="cs-research-type">Evaluative</span>
+          <span class="cs-research-type">Longitudinal</span>
+          <span class="cs-research-type">GTM</span>
+        </div>
+        <div class="cs-card-audience">Audience: Content Creators</div>
+        <div class="cs-card-tags">
+          <span class="cs-tag">IDIs</span>
+          <span class="cs-tag">Focus Groups</span>
+          <span class="cs-tag">8+ Wave Study</span>
+          <span class="cs-tag">GTM Research</span>
+        </div>
+        <div class="cs-card-cta">Read case study <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+      </div>
+
+      <div class="cs-card" onclick="openModal('cs1')">
+        <div class="cs-card-number">Case Study 02</div>
+        <div class="cs-card-title">Rapid In-Person Design Sprint on Creator Publishing Flows</div>
+        <div class="cs-research-types">
+          <span class="cs-research-type">Generative</span>
+          <span class="cs-research-type">Evaluative</span>
+        </div>
+        <div class="cs-card-audience">Audience: Content Creators</div>
+        <div class="cs-card-tags">
+          <span class="cs-tag">Focus Groups</span>
+          <span class="cs-tag">Co-Creation</span>
+          <span class="cs-tag">Semi-Structured Moderation</span>
+        </div>
+        <div class="cs-card-cta">Read case study <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+      </div>
+
+      <div class="cs-card" onclick="openModal('cs3')">
+        <div class="cs-card-number">Case Study 03</div>
+        <div class="cs-card-title">Defining a New Concept for Mixed Reality Headsets</div>
+        <div class="cs-research-types">
+          <span class="cs-research-type">Foundational</span>
+          <span class="cs-research-type">Generative</span>
+        </div>
+        <div class="cs-card-audience">Audience: MR Owners &amp; Prospects</div>
+        <div class="cs-card-tags">
+          <span class="cs-tag">IDIs</span>
+          <span class="cs-tag">JTBD Analysis</span>
+          <span class="cs-tag">Mixed Methods</span>
+          <span class="cs-tag">Survey</span>
+        </div>
+        <div class="cs-card-cta">Read case study <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+      </div>
+
+      <div class="cs-card" onclick="openModal('cs4')">
+        <div class="cs-card-number">Case Study 04</div>
+        <div class="cs-card-title">Social Media Video Player Interface Refresh</div>
+        <div class="cs-research-types">
+          <span class="cs-research-type">Evaluative</span>
+          <span class="cs-research-type">Generative</span>
+        </div>
+        <div class="cs-card-audience">Audience: Content Creators &amp; Social Media Users</div>
+        <div class="cs-card-tags">
+          <span class="cs-tag">IDIs</span>
+          <span class="cs-tag">Multi-Segment</span>
+          <span class="cs-tag">Concept Testing</span>
+        </div>
+        <div class="cs-card-cta">Read case study <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-inner">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Where I've worked</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Research &amp; Insights Sr. Manager</span>
+          <span class="exp-date">July 2023 — Present</span>
+        </div>
+        <div class="exp-company">Fuel Cycle · Main Client: Meta</div>
+        <ul class="exp-bullets">
+          <li>Lead 30+ end-to-end qualitative studies annually, conducting 400+ IDIs and focus groups per year, driving real-time product optimizations across product, design, and engineering orgs.</li>
+          <li>Scaled engagement with a top social media client from baseline to 3× annual project volume, growing revenue 250% YoY, establishing myself as the exclusively requested lead for mission-critical research initiatives.</li>
+          <li>Institutionalized qualitative research best practices by designing 6+ team-wide trainings and mentoring 5+ researchers — my moderation and reporting techniques became the benchmark for research excellence.</li>
+          <li>Partnered with product, design, and business stakeholders to identify high-priority research questions across ambiguous problem spaces, shaping product strategy across multiple release cycles.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Account Manager</span>
+          <span class="exp-date">Aug 2021 — July 2023</span>
+        </div>
+        <div class="exp-company">Insight Global · Main Client: Wells Fargo (UX Org)</div>
+        <ul class="exp-bullets">
+          <li>Collaborated with Fortune 500 clients to create personalized talent management strategies for UXR orgs, driving ~50% increase in production in under a year.</li>
+          <li>Implemented analytics-based models to identify performance gaps and target underserved markets, reaching annual sales goals within 6 months.</li>
+          <li>Built a $500K+ revenue portfolio from scratch through competitive analysis and strategic market prioritization.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Senior Staff Opinion Columnist</span>
+          <span class="exp-date">Oct 2018 — June 2021</span>
+        </div>
+        <div class="exp-company">Daily Bruin</div>
+        <ul class="exp-bullets">
+          <li>Pitched, authored, and edited long-form opinion editorials across print and digital formats. Promoted to senior staff within one year.</li>
+          <li>Conducted 5–10 interviews per column with students, faculty, and administrators to ground editorial narratives in real perspectives.</li>
+          <li>Part of the editorial team awarded <strong>Best Editorial Section (2020–2021)</strong>.</li>
+        </ul>
+        <p class="exp-note"><a href="https://dailybruin.com/author/isabel-weinerth" style="color:var(--blue);">See my articles →</a></p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Research Assistant</span>
+          <span class="exp-date">Oct 2020 — June 2021</span>
+        </div>
+        <div class="exp-company">UCLA · Lab of Dr. Daniel Silverman, M.D., Ph.D.</div>
+        <ul class="exp-bullets">
+          <li>Extracted and analyzed large datasets of brain scans to measure cognitive effects of chemotherapy during and post treatment.</li>
+          <li>Co-authored a peer-reviewed neuropsychological study accepted by a national research society.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section alt" id="education">
+  <div class="section-inner">
+    <p class="section-label">Education</p>
+    <h2 class="section-title">Academic background</h2>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-school">UCLA Extension</span>
+          <span class="edu-date">Completed March 2024</span>
+        </div>
+        <div class="edu-degree">UX Research &amp; Design Professional Certificate</div>
+        <div class="edu-note">4.0 GPA</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-school">University of California, Los Angeles (UCLA)</span>
+          <span class="edu-date">Graduated June 2021</span>
+        </div>
+        <div class="edu-degree">BA in Psychology, Minor in Spanish</div>
+        <div class="edu-note">Cum Laude · 3.85 GPA · Dean's Honors List 2018–2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTSIDE OF WORK -->
+<section class="section" id="outside-work">
+  <div class="section-inner">
+    <p class="section-label">Outside of Work</p>
+    <h2 class="section-title">Beyond the research</h2>
+    <p style="font-size:16px;color:var(--gray-600);line-height:1.8;margin-bottom:28px;max-width:560px;">When I close my laptop, I tend to swap it for something offline, like a trail, a kitchen, a new city, or the closest concert venue. A few things that keep me going:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;max-width:680px;">
+      <div class="interest-item">
+        <div class="interest-icon">🎵</div>
+        <div class="interest-text">
+          <div class="interest-name">Live Music</div>
+          <div class="interest-desc">Almost every genre — especially indie, electronic &amp; rock</div>
+        </div>
+      </div>
+      <div class="interest-item">
+        <div class="interest-icon">✈️</div>
+        <div class="interest-text">
+          <div class="interest-name">Traveling</div>
+          <div class="interest-desc">People watching is best in new places</div>
+        </div>
+      </div>
+      <div class="interest-item">
+        <div class="interest-icon">🥾</div>
+        <div class="interest-text">
+          <div class="interest-name">Hiking &amp; Backpacking</div>
+          <div class="interest-desc">A walk in the woods can cure all</div>
+        </div>
+      </div>
+      <div class="interest-item">
+        <div class="interest-icon">🏃</div>
+        <div class="interest-text">
+          <div class="interest-name">Running &amp; Yoga</div>
+          <div class="interest-desc">My favorite ways to stay active</div>
+        </div>
+      </div>
+      <div class="interest-item">
+        <div class="interest-icon">📚</div>
+        <div class="interest-text">
+          <div class="interest-name">Reading</div>
+          <div class="interest-desc">Current favs are musician memoirs</div>
+        </div>
+      </div>
+      <div class="interest-item">
+        <div class="interest-icon">🍰</div>
+        <div class="interest-text">
+          <div class="interest-name">Baking</div>
+          <div class="interest-desc">Cake, cookies, &amp; focaccia are my specialties</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <img src="LI prof pic.jpg" alt="Isabel Weinerth" style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;">
+      <div>
+        <div class="footer-name">Isabel Weinerth</div>
+        <div class="footer-sub">UX Researcher — Qualitative &amp; Mixed Methods</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:isabelweinerth@gmail.com">isabelweinerth@gmail.com</a>
+      <a href="https://www.linkedin.com/in/isabelweinerth/" target="_blank">LinkedIn →</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     MODALS
+═══════════════════════════════════════ -->
+
+<!-- MODAL 1: Design Sprint -->
+<div class="modal-overlay" id="modal-cs1" onclick="handleOverlayClick(event, 'cs1')">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-header-eyebrow">Case Study 02 · Content Creators</p>
+      <h2>Rapid In-Person Design Sprint on Creator Publishing Flows</h2>
+      <div class="modal-header-tags">
+        <span class="modal-tag">Focus Groups</span>
+        <span class="modal-tag">Co-Creation</span>
+        <span class="modal-tag">In-Person</span>
+        <span class="modal-tag">~5 Business Days</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('cs1')">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="impact-block">
+        <div class="impact-block-label">⚡ The Impact</div>
+        <p>Findings from this study directly shaped the product and engineering roadmaps, aligning feature development with the highest-impact user needs. The research translated creator-driven UX insights into validated live prototypes, driving measurable gains in user satisfaction and adoption. Its rapid, highly collaborative design also elevated cross-functional alignment by bringing teams into direct contact with user feedback, significantly strengthening trust and investment in UXR.</p>
+      </div>
+
+      <div class="modal-section">
+        <h3>The Research Challenge</h3>
+        <p>A leading social media platform wanted to define a bold six-month product roadmap focused on launching "big bet" production tools for Content Creators. The goal was to identify high-impact opportunities that would meaningfully elevate the creator experience and differentiate the platform in a competitive market. To accelerate alignment and decision-making, we led an intensive one-week design sprint, bringing together cross-functional stakeholders across product, design, engineering, and strategy to rapidly explore, prototype, and validate breakthrough concepts.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>My Role &amp; Key Decisions</h3>
+        <p>I moderated 8 in-person focus groups over 2 days with Content Creators with a live backroom audience of 30+ XFN observers. I leveraged subject matter expertise on Content Creators and the client's product ecosystem to gather actionable feedback on same-day feature concepts—meaning I received designs the morning of sessions, participated in EOD discussions with XFN observers to synthesize findings, and delivered same-day insights to drive real-time iteration. I also supported subsequent waves that advanced concepts from early ideation through iteration and usability testing.</p>
+        <div class="modal-callout">
+          <div class="modal-callout-label">Why In-Person Co-Creation?</div>
+          <p>The goal was to move fast and make real-time design decisions. Live group discussions and feedback enabled iterative prototyping, tighter team alignment, and deeper empathy for end users across product, design, and engineering.</p>
+        </div>
+        <div class="modal-callout" style="margin-top:12px;">
+          <div class="modal-callout-label">Why Prioritize Speed?</div>
+          <p>In fast-moving organizations, the speed of insight delivery can matter more than perfecting the deliverable. A clear, actionable point of view delivered at the right moment often drives more impact than a highly polished report that arrives too late. In engineering- and product-led environments especially, I focus on delivering concise, decision-ready insights that match the pace of the build cycle and keep teams moving forward.</p>
+        </div>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Example Stimuli</h3>
+        <p>The below picture shows real stimuli used with participants. Participants read concept statements (on the right side), sorted into piles of "likes" and "dislikes", then ranked their "likes" 1-5 and ranked their "dislikes" 6-11. Then, participants sketched out their top feature idea (on the left side).</p>
+        <img src="cs-images/cs1-stimuli.png" alt="Example stimuli: concept cards and participant sketch activity" style="width:100%;border-radius:4px;margin:16px 0 8px;display:block;">
+        <p style="font-size:13px;color:#64748B;font-style:italic;">Note: concept statements and participant sketch blurred for confidentiality.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Reflections</h3>
+        <p>The in-person format enabled deeper feedback and rapid iteration, with daily synthesis sessions unlocking faster decision-making than a traditional reporting cycle. Given the time-sensitive nature of feature development, we made a deliberate decision to prioritize speed and live collaboration over producing a comprehensive final report, trading polished documentation for immediate product impact. Subsequent waves transitioned to a virtual format to improve budget efficiency and layered in quantitative follow-ups to validate and scale the qualitative insights.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Process at a Glance</h3>
+        <div class="process-grid">
+          <div class="process-item">
+            <div class="process-item-label">Method</div>
+            <div class="process-item-value">In-Person Focus Groups</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Sample</div>
+            <div class="process-item-value">N=8 groups, 3 per group</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Timeline</div>
+            <div class="process-item-value">~5 Business Days</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Audience</div>
+            <div class="process-item-value">NYC Content Creators</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Recruitment</div>
+            <div class="process-item-value">Client DS-verified list</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Observers</div>
+            <div class="process-item-value">30+ Live XFN Backroom</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL 2: Creator Acquisition & Retention -->
+<div class="modal-overlay" id="modal-cs2" onclick="handleOverlayClick(event, 'cs2')">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-header-eyebrow">Case Study 01 · Content Creators</p>
+      <h2>Creator Acquisition &amp; Retention: From Pilot to National Launch</h2>
+      <div class="modal-header-tags">
+        <span class="modal-tag">IDIs</span>
+        <span class="modal-tag">Focus Groups</span>
+        <span class="modal-tag">8+ Wave Study</span>
+        <span class="modal-tag">Longitudinal</span>
+        <span class="modal-tag">GTM Research</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('cs2')">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="impact-block">
+        <div class="impact-block-label">⚡ The Impact</div>
+        <p>In early 2026, a leading social media platform launched a creator incentive program to wide public attention (covered by TechCrunch, CNBC, and Engadget). The campaign's name, value propositions, and program structure came directly from our research.</p>
+        <p style="margin-top:10px;">This was the culmination of 8+ research waves spanning about a year: from understanding first-time creator experiences, through iterative program refinement, to the GTM strategy that shaped the launch.</p>
+        <p style="margin-top:10px;">Internally, the research earned significant praise for delivering unusual clarity at a pivotal GTM moment: a decisive path forward that teams across the organization could rally behind. Externally, for the first time, the outcome was publicly visible: the 2026 program launched nationally, and the campaign language audiences encountered traced directly back to what we tested with creators in sessions.</p>
+      </div>
+
+      <div class="modal-section">
+        <h3>The Research Challenge</h3>
+        <p>A top social media platform piloted a creator incentive program in 2025 designed to attract established talent from competing platforms through structured bonuses for posting. The initial research goal was to understand creators' first-time experiences and identify what was driving retention versus attrition. As findings from each wave informed the next, the scope of the work expanded, ultimately shaping not just the program design, but the go-to-market strategy and public messaging for the platform's biggest creator initiative of 2026.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>My Role &amp; Key Decisions</h3>
+        <p>I led every wave of this research, partnering closely with the client UXR across the full year of study.</p>
+        <p style="margin-top:12px;">In Waves 1 and 2, I conducted approximately 40 interviews at two timepoints: once during the program and again after, to capture how creator perceptions evolved over time. I synthesized findings into a single comprehensive report distributed across research, program, and product teams, which directly informed key program updates and shaped the scope of follow-up studies.</p>
+        <p style="margin-top:12px;">Across Waves 3 through 8, I shifted to a focus group format, conducting approximately 10 groups per wave (N=3 per group) with roughly 30 creators per wave. Throughout each wave, I partnered with the client UXR team to produce in-flight summaries during active fieldwork and a final end-of-wave report on completion, keeping the program team aligned and moving in real time rather than waiting on a single end-of-study deliverable.</p>
+        <div class="modal-callout">
+          <div class="modal-callout-label">Why Shift From IDIs to Focus Groups (N=3)?</div>
+          <p>IDIs were the right tool for Waves 1 and 2: mapping individual onboarding experiences, retention drivers, and emotional arcs required the depth and privacy of one-on-one conversations. But by Wave 3, the research questions had shifted. We were now tracking how program changes landed across cohorts, comparing reactions across creator segments, and understanding the social narratives forming around the platform, which are questions better answered in a group context.</p>
+          <p style="margin-top:10px;">Compared to traditional focus groups, triads give each participant substantial airtime while still generating the peer interaction that reflects how creators actually talk about platforms in the real world. Creators are inherently communal; their opinions about programs and platforms are shaped by what peers think and share, so the format more closely mirrors the context in which those opinions form.</p>
+          <p style="margin-top:10px;">Logistically, running 10 groups per wave with roughly 30 creators maintained the sample depth of the IDI phases while significantly compressing fieldwork time, which is what made rapid in-flight summaries and tight end-of-wave turnarounds possible across six consecutive waves.</p>
+        </div>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>The Research Arc</h3>
+
+        <!-- Timeline visual -->
+        <div style="position:relative;margin:24px 0 28px;">
+
+          <!-- Connecting line -->
+          <div style="position:absolute;top:20px;left:20px;right:20px;height:2px;background:linear-gradient(to right,#2563EB,#93C5FD);z-index:0;"></div>
+
+          <!-- Four nodes -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;position:relative;z-index:1;">
+
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+              <div style="width:40px;height:40px;border-radius:50%;background:#2563EB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px;flex-shrink:0;">1–2</div>
+              <div style="font-size:11px;font-weight:700;color:#1E293B;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Pilot Evaluation</div>
+              <div style="font-size:12px;color:#64748B;line-height:1.5;">~40 IDIs across 2 timepoints</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+              <div style="width:40px;height:40px;border-radius:50%;background:#2563EB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px;flex-shrink:0;">3–5</div>
+              <div style="font-size:11px;font-weight:700;color:#1E293B;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Iterative Refinement</div>
+              <div style="font-size:12px;color:#64748B;line-height:1.5;">~30 creators per wave, focus groups</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+              <div style="width:40px;height:40px;border-radius:50%;background:#2563EB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px;flex-shrink:0;">6–7</div>
+              <div style="font-size:11px;font-weight:700;color:#1E293B;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Segment Exploration</div>
+              <div style="font-size:12px;color:#64748B;line-height:1.5;">Creator segments + competitive analysis</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+              <div style="width:40px;height:40px;border-radius:50%;background:#1D4ED8;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:10px;flex-shrink:0;box-shadow:0 0 0 3px #BFDBFE;">8</div>
+              <div style="font-size:11px;font-weight:700;color:#1E293B;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">GTM Strategy</div>
+              <div style="font-size:12px;color:#64748B;line-height:1.5;">Name, value props, messaging → public launch</div>
+            </div>
+
+          </div>
+        </div>
+
+        <p style="margin-bottom:16px;"><strong style="color:#1E293B;">Waves 1–2 — Pilot Evaluation:</strong><br/>Understood first-time creator experiences onboarding via the bonus program. Uncovered a critical misalignment between how the platform defined "effort" and how creators experienced it. Findings shaped onboarding flows, refined retention strategies, and established a framework for evaluating long-term incentive effectiveness that subsequent waves built on.</p>
+        <p style="margin-bottom:16px;"><strong style="color:#1E293B;">Waves 3–5 — Iterative Refinement:</strong><br/>Tracked program updates across subsequent cohorts across various program outcomes (~30 creators per wave). Assessed how changes landed, explored distinct audience segments, and built a cumulative understanding of retention and attrition drivers.</p>
+        <p style="margin-bottom:16px;"><strong style="color:#1E293B;">Waves 6–7 — Segment Exploration:</strong><br/>Deeper dives into specific creator segments and competitive platform comparisons, informing how the program needed to evolve to compete for high-value talent.</p>
+        <p><strong style="color:#1E293B;">Wave 8 — GTM Strategy:</strong><br/>The final wave shifted from program evaluation to go-to-market readiness. We tested program names, value propositions, and messaging with established creators, directly informing the campaign language used at public launch.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>GTM Wave Spotlight</h3>
+        <p>The GTM strategy wave culminated in the campaign name, value propositions, and program structure that went to public launch (covered by TechCrunch, CNBC, and Engadget). This wave had three goals: identify the program name with the strongest resonance, validate the core value propositions, and understand what would make a creator say yes to joining versus walking away.</p>
+        <p style="margin-top:12px;">In focus groups, we tested five name concepts, walked creators through program details, had them rank and react to stimuli in real time, and compared the 2026 program directly to the prior year's program to understand perceived improvement. Creators also mapped their unprompted associations with the platform as a creator space, providing candid competitive context that shaped how the GTM messaging was eventually framed.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Reflections</h3>
+        <p>The longitudinal nature of this work was its greatest strength. Each wave built on the last, but the synthesis across waves often happened informally. For a program of this scale and duration, I'd advocate for a dedicated cross-wave meta-synthesis: a structured effort to map how creator sentiment shifted over time and what drove those shifts. Though each individual report referenced past findings, a dedicated longitudinal artifact would have been as valuable to the strategy team as any individual wave report.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Process at a Glance</h3>
+        <div class="process-grid">
+          <div class="process-item">
+            <div class="process-item-label">Total Waves</div>
+            <div class="process-item-value">8+ (spanning ~1 year)</div>
+          </div>
+          <div class="process-item" style="background:#EFF6FF;border:1px solid #BFDBFE;">
+            <div class="process-item-label">GTM Wave Method</div>
+            <div class="process-item-value">Focus Groups (75 min)</div>
+          </div>
+          <div class="process-item" style="background:#EFF6FF;border:1px solid #BFDBFE;">
+            <div class="process-item-label">GTM Wave Sample</div>
+            <div class="process-item-value">N=8 groups, 23 creators</div>
+          </div>
+          <div class="process-item" style="background:#EFF6FF;border:1px solid #BFDBFE;">
+            <div class="process-item-label">GTM Timeline</div>
+            <div class="process-item-value">Moderation Jan 23–28, 2026</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Recruitment</div>
+            <div class="process-item-value">Client-verified list + referrals</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Deliverables</div>
+            <div class="process-item-value">Reports per wave + share-outs</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL 3: Mixed Reality -->
+<div class="modal-overlay" id="modal-cs3" onclick="handleOverlayClick(event, 'cs3')">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-header-eyebrow">Case Study 03 · MR Owners &amp; Prospects</p>
+      <h2>Defining a New Concept for Mixed Reality Headsets</h2>
+      <div class="modal-header-tags">
+        <span class="modal-tag">IDIs</span>
+        <span class="modal-tag">JTBD Analysis</span>
+        <span class="modal-tag">Mixed Methods</span>
+        <span class="modal-tag">0→1 Concept Research</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('cs3')">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="impact-block">
+        <div class="impact-block-label">⚡ The Impact</div>
+        <p>Insights clarified the highest-value jobs the product must support and identified the attributes that make the product feel intuitive, achievable, and trustworthy. The work aligned stakeholders around the most viable use cases for early development, surfaced previously overlooked emotional criteria, and reframed internal conversations from technical feasibility to human desirability. Findings also guided next-phase concept exploration and highlighted critical friction points by segment, enabling more targeted follow-up research and feature prioritization.</p>
+      </div>
+
+      <div class="modal-section">
+        <h3>The Research Challenge</h3>
+        <p>A leading technology client sought to understand user expectations and define opportunity areas for a new 0→1 concept in Mixed Reality (MR). The two main goals were to identify the most valuable Jobs to Be Done (JTBD) and the key attributes needed to drive meaningful adoption and satisfaction. To explore these goals, we conducted a quant-qual study with MR owners and MR prospects.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>My Role &amp; Key Decisions</h3>
+        <p>I led the qualitative phase end-to-end and partnered closely with the quantitative lead to merge both datasets into a cohesive insight framework. This included conducting 12 in-depth interviews, shaping the JTBD mapping and thematic clustering, and working directly with stakeholders to ensure outputs were actionable, relevant, and scalable. I translated observable behaviors and emotional patterns into program-level recommendations that helped the team re-evaluate which jobs and experiences the product should focus on first.</p>
+        <p style="margin-top:12px;">To synthesize across both methods, I grouped open-ended responses into core JTBD themes, mapped emotional versus functional goals by segment, assessed resonance across three early concept variants, and identified friction points by use case. This approach — rather than reporting on individual tasks in isolation — surfaced the shared motivations underneath them, and in doing so, inverted two of the team's core working hypotheses: the most common use cases turned out to be emotionally complex rather than functionally-driven, and users expected the product to serve multiple roles simultaneously, not one function at a time. The thematic mapping also revealed meaningful divergence between MR owners (who wanted seamless integration with existing tools and routines) and MR prospects (who sought novelty, inspiration, and low-friction delight) — a segment-level distinction that would have been easy to miss without synthesizing at the goal level rather than the task level.</p>
+        <div class="modal-callout">
+          <div class="modal-callout-label">Why This Methodological and Synthesis Approach?</div>
+          <p>We used a mixed-methods approach to balance breadth with depth. The survey helped surface a broad landscape of possible JTBD across a diverse sample, establishing a baseline for which functions and experiences to explore. IDIs allowed us to probe why those jobs mattered, how users envisioned the concept assisting in those jobs, and what emotional or behavioral context shaped their expectations.</p>
+          <p style="margin-top:10px;">From there, we grouped detailed user responses into larger thematic JTBD categories to reduce noise and identify shared underlying motivations. While users described a wide range of specific tasks, many mapped back to a smaller set of consistent functional and emotional goals. This layered synthesis made it easier to compare needs across segments, prioritize design implications, and avoid over-indexing on surface-level behaviors that were actually expressions of deeper, recurring jobs.</p>
+        </div>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Example Deliverable</h3>
+        <p>The slides below demonstrate how quantitative and qualitative data were integrated in this study. Slide 1 presents survey results identifying the top "learning" Jobs-To-Be-Done. Slide 2 highlights qualitative insights that add deeper context to these findings, illustrating how participants expect these learning experiences to look, feel, sound, and function in the final product.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 8px;">
+          <img src="cs-images/cs3-slide1.png" alt="Slide 1: Quantitative JTBD results" style="width:100%;border-radius:4px;display:block;">
+          <img src="cs-images/cs3-slide2.png" alt="Slide 2: Qualitative insights layer" style="width:100%;border-radius:4px;display:block;">
+        </div>
+        <p style="font-size:13px;color:#64748B;font-style:italic;">Note: slides have been blurred for client confidentiality.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Reflections</h3>
+        <p>For future phases of research, the team should explore: how to design for varied levels of user control, adaptive onboarding paths based on user intent, and how to effectively combine emotional and functional experiences within the same product surface.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Process at a Glance</h3>
+        <div class="process-grid">
+          <div class="process-item">
+            <div class="process-item-label">Phase 1</div>
+            <div class="process-item-value">Survey (N=383)</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Phase 2</div>
+            <div class="process-item-value">60-min IDIs (N=12)</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Timeline</div>
+            <div class="process-item-value">~40 Business Days</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Segments</div>
+            <div class="process-item-value">MR Owners + Prospects</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Recruitment</div>
+            <div class="process-item-value">Multi-panel model</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Framework</div>
+            <div class="process-item-value">JTBD + Thematic</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL 4: Video Unification -->
+<div class="modal-overlay" id="modal-cs4" onclick="handleOverlayClick(event, 'cs4')">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-header-eyebrow">Case Study 04 · Content Creators &amp; Social Media Users</p>
+      <h2>Social Media Video Player Interface Refresh</h2>
+      <div class="modal-header-tags">
+        <span class="modal-tag">IDIs</span>
+        <span class="modal-tag">Multi-Segment</span>
+        <span class="modal-tag">Concept Testing</span>
+        <span class="modal-tag">~20 Business Days</span>
+      </div>
+      <button class="modal-close" onclick="closeModal('cs4')">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="impact-block">
+        <div class="impact-block-label">⚡ The Impact</div>
+        <p>Insights defined the MVP for the unified viewing experience and creation tools, informed next steps for a unified monetization model, and uncovered mental models and comprehension gaps that improved onboarding alignment. The study provided strategic clarity for stakeholders while surfacing targeted areas for follow-up research.</p>
+      </div>
+
+      <div class="modal-section">
+        <h3>The Research Challenge</h3>
+        <p>A leading media platform sought to unify its video experience across short- and long-form content. To evaluate audience response, the team needed to understand the impact on diverse user segments across both content consumption and creation behaviors.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>My Role &amp; Key Decisions</h3>
+        <p>I recruited and conducted 32 in-depth interviews with content creators and social media users to explore how they perceive and navigate current video formats, what they expect from content tools and how unification may impact expectations, and where confusion or friction may arise post-unification. I then delivered two interim topline reports and one final deep-dive report (including a live share-out) to the research and product teams.</p>
+        <div class="modal-callout">
+          <div class="modal-callout-label">Why Social Media Users AND Content Creators?</div>
+          <p>The two groups are not only distinct audience segments the platform must consider when evaluating product updates, but they also directly shape each other's outcomes. Poor video consumption experiences can limit creator success and negatively impact how creators perceive the platform. And vice versa, a negative creator experience can reduce content quality for viewers. Taking this dual perspective gave the team a more holistic view of risks and opportunities before making strategic product decisions.</p>
+        </div>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Example Deliverable</h3>
+        <p>The below slide synthesizes product and design feedback—what works well, what needs refinement, and what causes concern—into a clear, actionable framework for cross-functional stakeholders who may not review the full report.</p>
+        <div style="margin:16px 0 8px;">
+          <img src="cs-images/cs4-slide.png" alt="Example deliverable: feedback synthesis framework" style="width:100%;border-radius:4px;display:block;">
+        </div>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Reflections</h3>
+        <p>While findings were directionally strong, the broad scope was a deliberate tradeoff: the study needed to move quickly to stay ahead of engineering timelines, which meant covering multiple segments and topics within a single round of fieldwork rather than sequencing them. The cost was analytical depth. Covering both creators and users in the same guide required allocating session time across more topics per interview, which compressed how far we could go on any single theme. If I were scoping this from the start, I'd have designed a modular guide with a shared core and segment-specific deep-dives, or run separate but parallel rounds for each segment — preserving the dual-perspective insight while giving each audience more dedicated space. I'd also have built in a short quant pulse earlier in the process to pre-validate hypotheses and sharpen where the qualitative phase needed to go deepest.</p>
+      </div>
+
+      <hr class="modal-divider"/>
+
+      <div class="modal-section">
+        <h3>Process at a Glance</h3>
+        <div class="process-grid">
+          <div class="process-item">
+            <div class="process-item-label">Method</div>
+            <div class="process-item-value">60-min Virtual IDIs</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Sample</div>
+            <div class="process-item-value">N=32</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Timeline</div>
+            <div class="process-item-value">~20 Business Days</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Segments</div>
+            <div class="process-item-value">3 (Users + 2 Creator tiers)</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Deliverables</div>
+            <div class="process-item-value">2 Toplines + 1 Deep-Dive</div>
+          </div>
+          <div class="process-item">
+            <div class="process-item-label">Analysis</div>
+            <div class="process-item-value">Thematic by segment</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e, id) {
+    if (e.target === document.getElementById('modal-' + id)) closeModal(id);
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      ['cs1','cs2','cs3','cs4'].forEach(id => closeModal(id));
+    }
+  });
+</script>
+
+</body>
+</html>
